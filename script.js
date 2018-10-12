@@ -7,9 +7,8 @@ const button = document.querySelector("button");
 
 console.log(inputs);
 
-//Converts the Nodelist to array
+//Converts the Nodelist ito
 const inputsToArray = Array.from(inputs);
-
 
 //Object of patterns for each input
 const patterns = {
@@ -29,12 +28,13 @@ inputs.forEach(element => {
 });
 
 //function to check that every element is validated before submit is enabled.
-//Every element must have a class of valid 
+//Every element must have a class of valid
+function isValid() {
   return inputsToArray.every(element => {
     return element.className == "valid";
   });
 }
-//Takes 2 arguments 
+//Takes 2 arguments
 //Outer if tests that the individual elements are valid and assigns class valid,
 //innner if checks that all elements have a class of valid before the submit is enabled.
 const formValidator = (element, pattern) => {
