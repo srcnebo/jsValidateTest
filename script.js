@@ -7,44 +7,48 @@ const button = document.querySelector("button");
 
 console.log(inputs);
 
+//Converts the Nodelist to array
 const inputsToArray = Array.from(inputs);
 
+
+//Object of patterns for each input
 const patterns = {
   firstname: /Steve/,
   lastname: /^[a-zA-Z]{3,15}$/,
   email: /^[a-z]+[\.]*[a-z]*@[a-z]+\.[a-z]{2,3}[\.]?[a-z]{1,2}$/,
   password: /^[\w\W\s]{6,20}$/,
-  telephone: /00/,
-  bio: /hi/
+  telephone: /^[+]\d{8,15}$/,
+  bio: /^[a-zA-Z0-9]{5,200}$/
 };
 
+//function to check if the input value is valid
 inputs.forEach(element => {
   element.addEventListener("input", e => {
     formValidator(e.target, patterns[e.target.name]);
   });
 });
 
-function isValid() {
+//function to check that every element is validated before submit is enabled.
+//Every element must have a class of valid 
   return inputsToArray.every(element => {
     return element.className == "valid";
   });
 }
+//Takes 2 arguments 
+//Outer if tests that the individual elements are valid and assigns class valid,
+//innner if checks that all elements have a class of valid before the submit is enabled.
 const formValidator = (element, pattern) => {
   if (pattern.test(element.value)) {
     element.className = "valid";
-    console.log("Hi1");
     if (isValid()) {
       button.className = "submit-button";
       button.disabled = false;
-      console.log("Hi2");
     } else {
       button.classList.remove("submit-button");
       button.disabled = true;
-      console.log("Hi3");
     }
   } else {
     element.className = "invalid";
-    console.log("hi4");
   }
 };
 
